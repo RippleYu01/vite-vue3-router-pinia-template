@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver, AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
-export default defineConfig((mode) => ({
+export default defineConfig(({ mode }) => ({
 
   plugins: [
     vue(),
@@ -17,7 +17,7 @@ export default defineConfig((mode) => ({
         'vue-router',
         'pinia'
       ],
-      dts: 'src/auto-imports.d.ts', // 自动生成声明文件
+      // dts: 'src/types/auto-imports.d.ts' // 自动生成声明文件   ts开启必须
     }),
     //自动引入你自己写的组件
     Components({
@@ -30,7 +30,7 @@ export default defineConfig((mode) => ({
       //   ElementPlusResolver(),      // 你要用哪个 UI 库组件就写哪个
       //   AntDesignVueResolver()      // 支持多个 UI 库
       // ],
-      // dts: 'src/components.d.ts'    // 自动生成类型声明
+      // dts: 'src/types/auto-imports.d.ts'    // 自动生成类型声明   ts开启必须
     })
 
   ],
