@@ -6,7 +6,8 @@ import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver, AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig((mode) => ({
+
   plugins: [
     vue(),
     //自动导入插件 import { ref, computed, onMounted } from 'vue'....
@@ -15,7 +16,8 @@ export default defineConfig({
         'vue',
         'vue-router',
         'pinia'
-      ]
+      ],
+      dts: 'src/auto-imports.d.ts', // 自动生成声明文件
     }),
     //自动引入你自己写的组件
     Components({
@@ -31,7 +33,6 @@ export default defineConfig({
       // dts: 'src/components.d.ts'    // 自动生成类型声明
     })
 
-
   ],
 
   resolve: {
@@ -42,7 +43,7 @@ export default defineConfig({
       components: path.resolve(__dirname, "src/components"),
     },
     // 通过import引入时无需写以下后缀名(依次查找)
-    extensions: [".js", "tx", ".vue", ".json"],
+    extensions: [".js", "ts", ".vue", ".json"],
   },
   server: {
     port: 520,
@@ -50,12 +51,32 @@ export default defineConfig({
     // 设置代理服务器
     proxy: {
       "/api": {
-        target: "https://jsonplaceholder.typicode.com",
+        target: 'https://jsonplaceholder.typicode.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     }
+  },
 
+  css: {
+    // 将css预编辑器的全局变量自动插入到每个scss/less 文件头部
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/styles/variables.scss";`, // 全局变量引入
+      },
+      less: {
+        // 开启less的js数学函数语法
+        javascriptEnabled: true,
+        // 全局Less变量
+        additionalData: `@import "@/styles/variables.less";`,
+      },
+    },
+    modules: {
+      // CSS模块命名规范，避免命名冲突
+      generateScopedName: mode === 'development'
+        ? '[name]__[local]__[hash:base64:5]'
+        : '[hash:base64:8]',
+    },
   },
 
   build: {
@@ -80,4 +101,4 @@ export default defineConfig({
       }
     }
   },
-});
+}));
