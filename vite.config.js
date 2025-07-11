@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => ({
       //   ElementPlusResolver(),      // 你要用哪个 UI 库组件就写哪个
       //   AntDesignVueResolver()      // 支持多个 UI 库
       // ],
-      // dts: 'src/types/auto-imports.d.ts'    // 自动生成类型声明   ts开启必须
+      // dts: 'src/types/components.d.ts',    // 组件自动生成类型声明   ts开启必须
     })
 
   ],
