@@ -2,6 +2,10 @@
 
 一个基于 Vue3 + Vite 的现代化前端项目模板，集成了 Axios、Vue Router、Pinia 等常用工具，提供了完整的项目结构和配置。
 
+## 作者
+
+- Ripple_Yu
+
 ## 🚀 技术栈
 
 - **Vue 3.5.13** - 渐进式 JavaScript 框架
