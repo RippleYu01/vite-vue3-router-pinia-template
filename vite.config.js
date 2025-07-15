@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
       components: path.resolve(__dirname, "src/components"),
     },
     // 通过import引入时无需写以下后缀名(依次查找)
-    extensions: [".js", "ts", ".vue", ".json"],
+    extensions: [".js", ".ts", ".vue", ".json"],
   },
   server: {
     port: 520,
